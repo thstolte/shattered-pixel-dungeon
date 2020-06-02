@@ -25,32 +25,55 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.items.Ankh;
 import com.shatteredpixel.shatteredpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
+import com.shatteredpixel.shatteredpixeldungeon.items.armor.HuntressArmor;
+import com.shatteredpixel.shatteredpixeldungeon.items.armor.MageArmor;
+import com.shatteredpixel.shatteredpixeldungeon.items.armor.RogueArmor;
+import com.shatteredpixel.shatteredpixeldungeon.items.armor.WarriorArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CloakOfShadows;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.PotionBandolier;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.ScrollHolder;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.VelvetPouch;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.Food;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.MeatPie;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfInvisibility;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlame;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfStrength;
+import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfAccuracy;
+import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfEnergy;
+import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfEvasion;
+import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfMight;
+import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfSharpshooting;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfLullaby;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMagicMapping;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfRage;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfRemoveCurse;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfDivination;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfLightning;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfMagicMissile;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfPrismaticLight;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.AssassinsBlade;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Crossbow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Gloves;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Greataxe;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Greatsword;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WarHammer;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingStone;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.Trident;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.DeviceCompat;
@@ -106,9 +129,27 @@ public enum HeroClass {
 		if (Dungeon.isChallenged(Challenges.NO_FOOD)){
 			new SmallRation().collect();
 		}
-		
-		new ScrollOfIdentify().identify();
 
+		Ankh ankh = new Ankh();
+		ankh.bless();
+		ankh.collect();
+
+		new ScrollOfUpgrade().quantity(20).collect();
+		new PotionOfHealing().quantity(30).collect();
+
+		new VelvetPouch().collect();
+		new PotionBandolier().collect();
+		new ScrollHolder().collect();
+		Dungeon.LimitedDrops.VELVET_POUCH.drop();
+		Dungeon.LimitedDrops.POTION_BANDOLIER.drop();
+		Dungeon.LimitedDrops.SCROLL_HOLDER.drop();
+
+		new ScrollOfIdentify().identify();
+		new ScrollOfUpgrade().identify();
+		new ScrollOfRemoveCurse().identify();
+		new PotionOfLiquidFlame().identify();
+		new PotionOfHealing().identify();
+		new PotionOfStrength().identify();
 	}
 
 	public Badges.Badge masteryBadge() {
@@ -126,70 +167,108 @@ public enum HeroClass {
 	}
 
 	private static void initWarrior( Hero hero ) {
-		(hero.belongings.weapon = new WornShortsword()).identify();
-		ThrowingStone stones = new ThrowingStone();
-		stones.quantity(3).collect();
-		Dungeon.quickslot.setSlot(0, stones);
+		Item i = new WarriorArmor().identify();
+		i.level(15);
+		i.upgrade().upgrade().upgrade();
+		if (!Challenges.isItemBlocked(i)) hero.belongings.armor = (WarriorArmor)i;
+
+		Greataxe axe = new Greataxe();
+		axe.upgrade().upgrade().upgrade().upgrade().upgrade().upgrade();
+		(hero.belongings.weapon = axe).identify();
+
+		Trident tridents = new Trident();
+		tridents.upgrade().upgrade().upgrade();
+		tridents.quantity(30).collect();
+		Dungeon.quickslot.setSlot(0, tridents);
+
+		new RingOfMight().collect();
+		new RingOfMight().collect();
 
 		if (hero.belongings.armor != null){
 			hero.belongings.armor.affixSeal(new BrokenSeal());
 		}
-		
-		new PotionBandolier().collect();
-		Dungeon.LimitedDrops.POTION_BANDOLIER.drop();
-		
+
 		new PotionOfHealing().identify();
 		new ScrollOfRage().identify();
 	}
 
 	private static void initMage( Hero hero ) {
-		MagesStaff staff;
-		
-		staff = new MagesStaff(new WandOfMagicMissile());
+		Item i = new MageArmor().identify();
+		i.level(15);
+		i.upgrade().upgrade().upgrade();
+		if (!Challenges.isItemBlocked(i)) hero.belongings.armor = (MageArmor)i;
 
+		MagesStaff staff = new MagesStaff(new WandOfPrismaticLight());
+		staff.upgrade().upgrade().upgrade().upgrade().upgrade().upgrade();
 		(hero.belongings.weapon = staff).identify();
 		hero.belongings.weapon.activate(hero);
 
+		WarHammer hammer = new WarHammer();
+		hammer.upgrade().upgrade().upgrade().upgrade().upgrade().upgrade();
+		(hero.belongings.weapon = hammer).identify();
+		hero.belongings.weapon.activate(hero);
+
+		new RingOfEnergy().collect();
+		new RingOfEnergy().collect();
+
 		Dungeon.quickslot.setSlot(0, staff);
 
-		new ScrollHolder().collect();
-		Dungeon.LimitedDrops.SCROLL_HOLDER.drop();
-		
 		new ScrollOfUpgrade().identify();
 		new PotionOfLiquidFlame().identify();
 	}
 
 	private static void initRogue( Hero hero ) {
-		(hero.belongings.weapon = new Dagger()).identify();
+		Item i = new RogueArmor().identify();
+		i.level(15);
+		i.upgrade().upgrade().upgrade();
+		if (!Challenges.isItemBlocked(i)) hero.belongings.armor = (RogueArmor)i;
+
+		AssassinsBlade blade = new AssassinsBlade();
+		blade.upgrade().upgrade().upgrade().upgrade().upgrade().upgrade();
+		(hero.belongings.weapon = blade).identify();
 
 		CloakOfShadows cloak = new CloakOfShadows();
+		cloak.upgrade().upgrade().upgrade().upgrade().upgrade().upgrade();
 		(hero.belongings.misc1 = cloak).identify();
 		hero.belongings.misc1.activate( hero );
 
-		ThrowingKnife knives = new ThrowingKnife();
-		knives.quantity(3).collect();
+		Trident tridents = new Trident();
+		tridents.upgrade().upgrade().upgrade();
+		tridents.quantity(30).collect();
+
+		new RingOfEvasion().collect();
+		new RingOfEvasion().collect();
 
 		Dungeon.quickslot.setSlot(0, cloak);
-		Dungeon.quickslot.setSlot(1, knives);
+		Dungeon.quickslot.setSlot(1, tridents);
 
-		new VelvetPouch().collect();
-		Dungeon.LimitedDrops.VELVET_POUCH.drop();
-		
 		new ScrollOfMagicMapping().identify();
 		new PotionOfInvisibility().identify();
 	}
 
 	private static void initHuntress( Hero hero ) {
+		Item i = new HuntressArmor().identify();
+		i.level(15);
+		i.upgrade().upgrade().upgrade();
+		if (!Challenges.isItemBlocked(i)) hero.belongings.armor = (HuntressArmor)i;
 
-		(hero.belongings.weapon = new Gloves()).identify();
+		Crossbow xbow = new Crossbow();
+		xbow.upgrade().upgrade().upgrade().upgrade().upgrade().upgrade();
+		(hero.belongings.weapon = xbow).identify();
+
 		SpiritBow bow = new SpiritBow();
+		bow.upgrade().upgrade().upgrade().upgrade().upgrade().upgrade();
 		bow.identify().collect();
+
+		Trident tridents = new Trident();
+		tridents.upgrade().upgrade().upgrade();
+		tridents.quantity(30).collect();
+
+		new RingOfAccuracy().collect();
+		new RingOfSharpshooting().collect();
 
 		Dungeon.quickslot.setSlot(0, bow);
 
-		new VelvetPouch().collect();
-		Dungeon.LimitedDrops.VELVET_POUCH.drop();
-		
 		new PotionOfMindVision().identify();
 		new ScrollOfLullaby().identify();
 	}

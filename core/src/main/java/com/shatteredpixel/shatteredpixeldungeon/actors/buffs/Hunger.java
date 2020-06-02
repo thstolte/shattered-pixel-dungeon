@@ -98,7 +98,7 @@ public class Hunger extends Buff implements Hero.Doom {
 					statusUpdated = true;
 
 				}
-				level = newLevel;
+				level = 0;
 
 				if (statusUpdated) {
 					BuffIndicator.refreshHero();
