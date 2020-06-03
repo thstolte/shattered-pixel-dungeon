@@ -145,7 +145,7 @@ public class Hero extends Char {
 	
 	public static final int MAX_LEVEL = 30;
 
-	public static final int STARTING_STR = 10;
+	public static final int STARTING_STR = 22;
 	
 	private static final float TIME_TO_REST		    = 1f;
 	private static final float TIME_TO_SEARCH	    = 2f;
@@ -154,8 +154,8 @@ public class Hero extends Char {
 	public HeroClass heroClass = HeroClass.ROGUE;
 	public HeroSubClass subClass = HeroSubClass.NONE;
 	
-	private int attackSkill = 10;
-	private int defenseSkill = 5;
+	private int attackSkill = 100;
+	private int defenseSkill = 50;
 
 	public boolean ready = false;
 	private boolean damageInterrupt = true;
@@ -172,10 +172,10 @@ public class Hero extends Char {
 	
 	public float awareness;
 	
-	public int lvl = 1;
+	public int lvl = 15;
 	public int exp = 0;
 	
-	public int HTBoost = 0;
+	public int HTBoost = 100;
 	
 	private ArrayList<Mob> visibleEnemies;
 
@@ -186,7 +186,7 @@ public class Hero extends Char {
 	public Hero() {
 		super();
 
-		HP = HT = 20;
+		HP = HT = 200;
 		STR = STARTING_STR;
 		
 		belongings = new Belongings( this );
