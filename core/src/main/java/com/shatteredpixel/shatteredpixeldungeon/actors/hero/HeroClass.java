@@ -60,7 +60,8 @@ public enum HeroClass {
 	WARRIOR( "warrior", HeroSubClass.BERSERKER, HeroSubClass.GLADIATOR ),
 	MAGE( "mage", HeroSubClass.BATTLEMAGE, HeroSubClass.WARLOCK ),
 	ROGUE( "rogue", HeroSubClass.ASSASSIN, HeroSubClass.FREERUNNER ),
-	HUNTRESS( "huntress", HeroSubClass.SNIPER, HeroSubClass.WARDEN );
+	HUNTRESS( "huntress", HeroSubClass.SNIPER, HeroSubClass.WARDEN ),
+	LINK( "link", HeroSubClass.SNIPER, HeroSubClass.GLADIATOR );
 
 	private String title;
 	private HeroSubClass[] subClasses;
@@ -92,6 +93,10 @@ public enum HeroClass {
 			case HUNTRESS:
 				initHuntress( hero );
 				break;
+
+			case LINK:
+				initLink( hero );
+				break;
 		}
 		
 	}
@@ -121,6 +126,8 @@ public enum HeroClass {
 				return Badges.Badge.MASTERY_ROGUE;
 			case HUNTRESS:
 				return Badges.Badge.MASTERY_HUNTRESS;
+			case LINK:
+				return Badges.Badge.MASTERY_LINK;
 		}
 		return null;
 	}
@@ -193,7 +200,24 @@ public enum HeroClass {
 		new PotionOfMindVision().identify();
 		new ScrollOfLullaby().identify();
 	}
-	
+
+	private static void initLink( Hero hero ) {
+		(hero.belongings.weapon = new WornShortsword()).identify();
+		ThrowingStone stones = new ThrowingStone();
+		stones.quantity(3).collect();
+		Dungeon.quickslot.setSlot(0, stones);
+
+		if (hero.belongings.armor != null){
+			hero.belongings.armor.affixSeal(new BrokenSeal());
+		}
+
+		new PotionBandolier().collect();
+		Dungeon.LimitedDrops.POTION_BANDOLIER.drop();
+
+		new PotionOfHealing().identify();
+		new ScrollOfRage().identify();
+	}
+
 	public String title() {
 		return Messages.get(HeroClass.class, title);
 	}
@@ -212,6 +236,8 @@ public enum HeroClass {
 				return Assets.ROGUE;
 			case HUNTRESS:
 				return Assets.HUNTRESS;
+			case LINK:
+				return Assets.KING;
 		}
 	}
 	
@@ -249,6 +275,14 @@ public enum HeroClass {
 						Messages.get(HeroClass.class, "huntress_perk4"),
 						Messages.get(HeroClass.class, "huntress_perk5"),
 				};
+			case LINK:
+				return new String[]{
+						Messages.get(HeroClass.class, "link_perk1"),
+						Messages.get(HeroClass.class, "link_perk2"),
+						Messages.get(HeroClass.class, "link_perk3"),
+						Messages.get(HeroClass.class, "link_perk4"),
+						Messages.get(HeroClass.class, "link_perk5"),
+				};
 		}
 	}
 	
@@ -265,6 +299,8 @@ public enum HeroClass {
 				return Badges.isUnlocked(Badges.Badge.UNLOCK_ROGUE);
 			case HUNTRESS:
 				return Badges.isUnlocked(Badges.Badge.UNLOCK_HUNTRESS);
+			case LINK:
+				return Badges.isUnlocked(Badges.Badge.UNLOCK_LINK);
 		}
 	}
 	
@@ -278,6 +314,8 @@ public enum HeroClass {
 				return Messages.get(HeroClass.class, "rogue_unlock");
 			case HUNTRESS:
 				return Messages.get(HeroClass.class, "huntress_unlock");
+			case LINK:
+				return Messages.get(HeroClass.class, "link_unlock");
 		}
 	}
 
