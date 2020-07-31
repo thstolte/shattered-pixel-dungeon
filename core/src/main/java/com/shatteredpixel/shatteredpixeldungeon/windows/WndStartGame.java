@@ -65,7 +65,7 @@ public class WndStartGame extends Window {
 		PixelScene.align(title);
 		add(title);
 		
-		float heroBtnSpacing = (WIDTH - 4*HeroBtn.WIDTH)/5f;
+		float heroBtnSpacing = (WIDTH - 6*HeroBtn.WIDTH)/5f;
 		
 		float curX = heroBtnSpacing;
 		for (HeroClass cl : HeroClass.values()){
@@ -160,7 +160,7 @@ public class WndStartGame extends Window {
 		
 		private Image hero;
 		
-		private static final int WIDTH = 24;
+		private static final int WIDTH = 12;
 		private static final int HEIGHT = 16;
 		
 		HeroBtn ( HeroClass cl ){
@@ -331,6 +331,11 @@ public class WndStartGame extends Window {
 							heroItem.icon(new ItemSprite(ItemSpriteSheet.SPIRIT_BOW, null));
 							heroLoadout.icon(new ItemSprite(ItemSpriteSheet.GLOVES, null));
 							heroMisc.icon(new Image(Assets.TILES_SEWERS, 112, 96, 16, 16 ));
+							break;
+						case LINK:
+							heroItem.icon(new ItemSprite(ItemSpriteSheet.SPIRIT_ARROW, null));
+							heroLoadout.icon(new ItemSprite(ItemSpriteSheet.WORN_SHORTSWORD, null));
+							heroMisc.icon(Icons.get(Icons.DEPTH));
 							break;
 					}
 					
